@@ -19,13 +19,13 @@
 для доступа к медиафайлу:
 
 <!-- Исходный вариант --> 
-<img src="/media/{{ object.image }}" />
+img src="/media/{{ object.image }}" /
 <!-- Итоговый вариант -->
-<img src="{{ object.image|mediapath }}" />
+img src="{{ object.image|mediapath }}" /
 
 Реализуйте описанный функционал с помощью шаблонного тега:
 
 <!-- Исходный вариант -->
-<img src="/media/{{ object.image }}" />
+img src="/media/{{ object.image }}" /
 <!-- Итоговый вариант -->
-<img src="{% mediapath object.image %}" />
+img src="{% mediapath object.image %}" /

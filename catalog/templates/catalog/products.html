@@ -11,7 +11,8 @@
   {% for product in object_list %}
     <div class="card" style="width: 18rem; flex-shrink: 0;">
 {# img src="/media/{{ product.preview }}" class="card-img-top" #}
-        <img src="{{ product.preview|mediapath }}" class="card-img-top">
+{# img src="{{ product.preview|mediapath }}" class="card-img-top" #}
+        <img src="{% mediapath product.preview %}" class="card-img-top">
         <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
             <p class="card-text">{{ product.description|truncatechars:100 }} не более 100 слов</p>
