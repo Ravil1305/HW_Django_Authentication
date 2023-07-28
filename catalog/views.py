@@ -5,7 +5,7 @@ from catalog.models import Product
 
 def index(request):
     context = {
-        'object_list': Product.objects.all()
+        'object_list': Product.objects.all()[:1]
     }
     return render(request, 'catalog/index.html', context)
 

@@ -10,13 +10,21 @@
 
 <div class="card">
     {% for product in object_list %}
-        <div class="card-body">
-            <h5 class="card-title">Наименование: {{ product.name }}</h5>
-            <p class="card-text">Описание: {{ product.description }}</p>
-            <p class="card-text">Категория: {{ product.category }}</p>
-            <p class="card-text">Цена: {{ product.price }}</p>
-            <p class="card-text">Дата создания: {{ product.date_of_creation }}</p>
-            <p class="card-text">Дата последнего изменения: {{ product.last_modified_date }}</p>
+        <div class="product-card">
+            <h2>{{ product.name }}</h2>
+            <img src="/media/{{ product.preview }}" alt="{{ product.name }}" class="product-image">
+            <p>{{ product.description }}</p>
+            <p>Цена {{ product.price }} рублей</p>
+            <div class="product-details">
+                <div class="product-detail">
+                    <span class="product-detail-label">Дата создания:</span>
+                    <span class="product-detail-value">{{ product.date_of_creation }}</span>
+                </div>
+                <div class="product-detail">
+                    <span class="product-detail-label">Дата изменения:</span>
+                    <span class="product-detail-value">{{ product.last_modified_date }}</span>
+                </div>
+            </div>
         </div>
     {% endfor %}
 </div>

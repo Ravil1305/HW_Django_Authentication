@@ -16,6 +16,7 @@
         <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
             <p class="card-text">{{ product.description|truncatechars:100 }} не более 100 слов</p>
+            <p class="card-text">Цена {{ product.price }} рублей</p>
         </div>
     </div>
   {% endfor %}
