@@ -1,0 +1,30 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+<style>
+    html, body {
+        height: 100%;
+    }
+</style>
+<div class="container h-100">
+    <div class="row h-100">
+        <div class="col-12 d-flex align-items-center justify-content-center">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p><strong>Вы уверены, что хотите удалить статью '{{ object.title }}'?</strong></p>
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'blog:list' %}" class="btn btn-warning">Отмена</a>
+                                <button type="submit" class="btn btn-danger">Удалить</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

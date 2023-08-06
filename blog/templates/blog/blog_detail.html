@@ -1,0 +1,46 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+<style>
+    .button-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .middle {
+      display: flex;
+      justify-content: center;
+    }
+</style>
+<div class="container">
+    <div class="button-row mb-5">
+        <div>
+            <a class="btn btn-outline-primary" href="{% url 'blog:list' %}">Вернуться к статьям</a>
+        </div>
+    </div>
+    <div class="row middle">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                {% if blog.preview %}
+                <img src="{{ blog.preview.url }}" alt="Превью">
+                {% else %}
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ object.title }}</h5>
+                    <p class="card-text">{{ object.content }}</p>
+                    <p class="card-text"><small class="text-muted">{{ object.date_of_creation }}</small></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p>Slug: {{ object.slug }}</p>
+                            <p>Признак публикации: {{ object.sign_of_publication }}</p>
+                            <p>Количество просмотров: {{ object.number_of_views }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

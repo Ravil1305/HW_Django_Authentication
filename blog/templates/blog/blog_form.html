@@ -1,0 +1,33 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+<style>
+    html, body {
+        height: 100%;
+    }
+</style>
+<div class="container h-100">
+    <div class="row h-100">
+        <div class="col-12 d-flex align-items-center justify-content-center">
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-success">
+                                {% if object %}
+                                    Редактировать
+                                {% else %}
+                                    Создать
+                                {% endif %}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
