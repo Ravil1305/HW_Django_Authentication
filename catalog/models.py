@@ -15,6 +15,10 @@ class Product(models.Model):
     def __str__(self):
         return f'{self.name}: {self.category}'
 
+    def get_current_version(self):
+        current_version = self.productversion_set.filter(is_current=True).first()
+        return current_version if current_version else None
+
     class Meta:
         verbose_name = 'продукт'
         verbose_name_plural = 'продукты'
@@ -30,3 +34,17 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
+
+
+class ProductVersion(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='продукт')
+    version_number = models.PositiveIntegerField(verbose_name='номер версии')
+    version_name = models.CharField(max_length=100, verbose_name='название версии')
+    is_current = models.BooleanField(default=False, verbose_name='признак текущей версии')
+
+    def __str__(self):
+        return f'{self.product}: {self.version_name}'
+
+    class Meta:
+        verbose_name = 'версия'
+        verbose_name_plural = 'версии'

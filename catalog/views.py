@@ -1,26 +1,49 @@
-# from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.forms import inlineformset_factory
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from catalog.models import Product
+from catalog.forms import ProductForm, ProductVersionForm
+from catalog.models import Product, ProductVersion
 
 
-# def index(request):
-#     context = {
-#         'object_list': Product.objects.all()
-#     }
-#     return render(request, 'catalog/product_list.html', context)
+class ProductsCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy('catalog:list')
 
-class IndexListView(ListView):
+
+class ProductsUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy('catalog:list')
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        ProductVersionFormset = inlineformset_factory(Product, ProductVersion, form=ProductVersionForm, extra=1)
+        if self.request.method == 'POST':
+            context_data['formset'] = ProductVersionFormset(self.request.POST, instance=self.object)
+        else:
+            context_data['formset'] = ProductVersionFormset(instance=self.object)
+        return context_data
+
+    def form_valid(self, form):
+        formset = self.get_context_data()['formset']
+        self.object = form.save()
+        if formset.is_valid():
+            formset.instance = self.object
+            formset.save()
+
+        return super().form_valid(form)
+
+
+class ProductsListView(ListView):
     model = Product
 
-
-# def products(request, pk):
-#     products_item = Product.objects.get(pk=pk)
-#     context = {
-#         'object_list': Product.objects.filter(id=pk),
-#         'title': f'{products_item}'
-#     }
-#     return render(request, 'catalog/product_detail.html', context)
 
 class ProductsDetailView(DetailView):
     model = Product
+
+
+class ProductsDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('catalog:list')
