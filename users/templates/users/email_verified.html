@@ -1,0 +1,38 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            padding: 10px 20px;
+            background-color: #ffffff;
+            max-width: 600px;
+            margin: 50px auto;
+            border-radius: 5px;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+    <body>
+    <div class="container">
+        <h1>Подтверждение электронной почты</h1>
+        <p>
+            Ваш адрес электронной почты был успешно подтвержден. Теперь вы можете войти в свой аккаунт и пользоваться
+            всеми возможностями сайта.
+        </p>
+    </div>
+    </body>
+{% endblock %}

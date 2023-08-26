@@ -22,7 +22,7 @@ def forbidden_words_validator(value):
 class ProductForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
-        exclude = ('category',)
+        exclude = ('category', 'user',)
 
 
 def __init__(self, *args, **kwargs):

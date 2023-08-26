@@ -6,12 +6,23 @@
     <title>Товары</title>
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .button-margin {
-            margin-right: 16px;
+        .nav-user {
+            position: absolute;
+            top: 16px;
+            right: 16px;
         }
     </style>
 </head>
 <body>
+    <nav class="nav-user">
+      {% if not user.is_anonymous %}
+        <a href="{% url 'users:profile' %}">Профиль</a>
+        <a href="{% url 'users:logout' %}">Выйти</a>
+      {% else %}
+        <a href="{% url 'users:login' %}">Войти</a>
+        <a href="{% url 'users:register' %}">Регистрация</a>
+      {% endif %}
+    </nav>
 {% block content %}
 {% endblock %}
 <script src="/static/js/bootstrap.bundle.min.js"></script>

@@ -1,0 +1,30 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+    <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header"></div>
+            <div class="card-body">
+                 <form method="post">
+                     {% csrf_token %}
+                     {{ form.as_p }}
+                     <button type="submit" class="btn btn-success">Войти</button>
+                 </form>
+                 <hr>
+                 <form method="post">
+                     {% csrf_token %}
+                     <div class="form-group">
+                         <label for="resetPasswordEmail">Введите ваш адрес электронной почты для восстановления пароля</label>
+                         <input type="email" class="form-control" id="resetPasswordEmail" name="email" required>
+                     </div>
+                     <button type="submit" class="btn btn-primary" name="reset_password">Отправить новый пароль</button>
+                 </form>
+            </div>
+            <div class="card-footer"></div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
