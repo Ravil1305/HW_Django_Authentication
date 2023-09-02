@@ -44,7 +44,7 @@ class ProductsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         product = self.get_object()
-        return self.request.user == product.user
+        return self.request.user.is_staff or self.request.user == product.user
 
 
 class ProductsListView(ListView):

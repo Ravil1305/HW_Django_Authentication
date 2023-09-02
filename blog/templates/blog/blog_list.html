@@ -1,46 +1,51 @@
 {% extends 'catalog/base.html' %}
 
 {% block content %}
-<style>
-  .button-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 20px;
-  }
-</style>
-<div class="container">
-    <div class="button-row mb-5">
-        <div>
-            <a class="btn btn-outline-primary" href="{% url 'blog:create' %}">Добавить статью</a>
+    <h2 style="text-align: center;">Статьи</h2>
+    <style>
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+    </style>
+    <div class="container">
+        <div class="button-row mb-5">
+            <div>
+                <a class="btn btn-outline-primary" href="{% url 'blog:create' %}">Добавить статью</a>
+            </div>
+            <div>
+                <a class="btn btn-outline-primary" href="{% url 'catalog:list' %}">Вернуться на главную</a>
+            </div>
         </div>
-        <div>
-            <a class="btn btn-outline-primary" href="{% url 'catalog:list' %}">Вернуться на главную</a>
-        </div>
-    </div>
-    <div class="row">
-        {% for object in object_list %}
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <p class="card-text">
-                            {{ object|title }}
-                        </p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <a href="{% url 'blog:view' object.pk %}"
-                                   class="btn btn-sm btn-outline-secondary">Просмотр</a>
-                                <a href="{% url 'blog:edit' object.pk %}" type="button"
-                                   class="btn btn-sm btn-outline-secondary">Редактировать</a>
-                                <a href="{% url 'blog:delete' object.pk %}" type="button"
-                                   class="btn btn-sm btn-outline-danger">Удалить</a>
+        <div class="row">
+            {% for object in object_list %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <p class="card-text">
+                                {{ object|title }}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="{% url 'blog:view' object.pk %}"
+                                       class="btn btn-sm btn-outline-secondary">Просмотр</a>
+                                    {% if perms.blog.change_blog %}
+                                        <a href="{% url 'blog:edit' object.pk %}" type="button"
+                                           class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                                    {% endif %}
+                                    {% if perms.blog.delete_blog %}
+                                        <a href="{% url 'blog:delete' object.pk %}" type="button"
+                                           class="btn btn-sm btn-outline-danger">Удалить</a>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-</div>
 {% endblock %}

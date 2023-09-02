@@ -14,6 +14,7 @@ class Product(models.Model):
     date_of_creation = models.DateField(verbose_name='дата создания')
     last_modified_date = models.DateField(verbose_name='дата последнего изменения')
     user = models.ForeignKey(User, on_delete=models.CASCADE, **NULLABLE, verbose_name='пользователь')
+    is_publication = models.BooleanField(default=False, verbose_name='признак публикации')
 
     def __str__(self):
         return f'{self.name}: {self.category}'
@@ -25,6 +26,12 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'продукт'
         verbose_name_plural = 'продукты'
+        permissions = [
+            (
+                'set_published',
+                'Can publish product'
+            )
+        ]
 
 
 class Category(models.Model):
